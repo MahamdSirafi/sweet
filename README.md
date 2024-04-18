@@ -1,7 +1,7 @@
 # API for a chain of sweets shops
 
 ## Introduction
-This project aims to develop an application that manages authentication, licensing, protection, and error handling in Node.js. It includes the User table to manage user accounts.
+This is an application programming interface for a sweets company that contains many centers. In this project, we manage the order process for this company and track the process of transferring orders to users.
 
 ## Database Seed
 

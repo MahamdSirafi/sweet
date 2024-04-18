@@ -75,7 +75,7 @@ router
     dynamicMiddleware.addVarBody("status", "مكتمل"),
     orderController.updateOrder
   );
-  router
+router
   .route("/:id/done") //من اجل تاكيد توصيل الطلب وستلام المبلغ من المستخدم في حال التوصيل
   .patch(
     authMiddlewers.restrictTo("delivery"),
@@ -91,3 +91,4 @@ router
     orderController.updateOrderErr
   );
 module.exports = router;
+// git remote add sweet https://github.com/MahamdSirafi/sweet.git

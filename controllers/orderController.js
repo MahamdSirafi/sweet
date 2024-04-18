@@ -42,7 +42,7 @@ exports.getOrder = factory.getOne(
     path: "location",
   },
   {
-    path: "restaurant",
+    path: "branch",
     select: "name -_id",
   }
 );
@@ -52,8 +52,8 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   const thisBranch = await Branch.findById(req.body.branch);
   req.body.total = 0;
   let thisProduct;
-  if (req.body.statuspaid == "نقدي") {
-    req.body.paid = false;
+  if (req.body.statuspaid !== "نقدي") {
+    req.body.paid = true;
   }
   for (let i = 0; i < req.body.cart.length; i++) {
     thisProduct = await Product.findById(req.body.cart[i].product);
@@ -115,7 +115,7 @@ exports.updateOrderErr = catchAsync(async (req, res, next) => {
   const thisBranch = await Branch.findById(req.body.branch);
   req.body.total = 0;
   let thisProduct;
-  if (req.body.statuspaid == "نقدي") {
+  if (req.body.statuspaid !== "نقدي") {
     req.body.paid = true;
   }
   for (let i = 0; i < req.body.cart.length; i++) {
@@ -199,46 +199,3 @@ exports.statisticsWithLinkUser = factory.statisticsWithLink(
   "user.phone",
   "user.email"
 );
-//كود الاحصائيات بدون تابع
-// catchAsync(async (req, res, next) => {
-//   const doc = await Order.aggregate([
-//     {
-//       $lookup: {
-//         from: "users",
-//         localField: "user",
-//         foreignField: "_id",
-//         as: "user",
-//       },
-//     },
-//     {
-//       $project: {
-//         _id: 0,
-//         "user.name": 1,
-//         "user.phone": 1,
-//         "user.email": 1,
-//         priceDelivery: 1,
-//         year: { $year: "$createdAt" },
-//         month: { $month: "$createdAt" },
-//         day: { $dayOfMonth: "$createdAt" },
-//       },
-//     },
-//     {
-//       $match: { year: +req.params.year, month: +req.params.month },
-//     },
-//     {
-//       $group: {
-//         _id: "$user",
-//         totalOrders: { $sum: 1 },
-//         totalPrice: { $sum: "$priceDelivery" },
-//         avglPrice: { $avg: "$priceDelivery" },
-//         maxlPrice: { $max: "$priceDelivery" },
-//         minlPrice: { $min: "$priceDelivery" },
-//       },
-//     },
-//   ]);
-//   res.status(200).json({
-//     status: "success",
-//     doc,
-//   });
-// });
-// });
