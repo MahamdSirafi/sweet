@@ -10,55 +10,9 @@ exports.createReview = factory.createOne(Review);
 exports.updateReview = factory.updateOne(Review);
 exports.deleteReview = factory.deleteOne(Review);
 
-// exports.getAllReviewsRes = catchAsync(async (req, res, next) => {
-// const thisBranch = await Branch.findOne({ manger: req.user._id }, { _id: 1 });
-//   const doc = await Review.aggregate([
-//     {
-//       $lookup: {
-//         from: "orders",
-//         localField: "order",
-//         foreignField: "_id",
-//         as: "order",
-//       },
-//     },
-//     {
-//       $lookup: {
-//         from: "users",
-//         localField: "user",
-//         foreignField: "_id",
-//         as: "user",
-//       },
-//     },
-//     {
-//       $lookup: {
-//         from: "prodeucts",
-//         localField: "order.cart.product",
-//         foreignField: "_id",
-//         as: "prodeuct",
-//       },
-//     },
-//     {
-//       $match: {
-//         "order.branch": thisBranch._id,
-//         type: "order",
-//       },
-//     },
-//     {
-//       $project: {
-//         "user.name": 1,
-//         "user.phone": 1,
-//         review: 1,
-//       },
-//     },
-//   ]);
-//   res.status(200).json({
-//     status: "success",
-//     doc,
-//   });
-// });
 exports.getAllReviewProduct = factory.getAllpop1(
   ReviewProduct,
-  { path: "prodect" },
+  { path: "product" },
   { path: "user", select: "name phone" }
 );
 exports.getReviewProduct = factory.getOne(
