@@ -1,4 +1,5 @@
 const Branch = require("../models/branchModel");
+const Order = require("../models/branchModel");
 const AppError = require("../utils/appError");
 const handlerFactory = require("../utils/handlerFactory");
 const catchAsync = require("../utils/catchAsync");
