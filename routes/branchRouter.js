@@ -27,6 +27,7 @@ router
   .patch(
     authMiddlewers.protect,
     authMiddlewers.restrictTo("mgr"),
+    dynamicMiddleware.addVarBody("branch", "branchId"),
     checkMiddleware.checkOwner(branch, "manger", "id"),
     branchController.updatebranch
   );

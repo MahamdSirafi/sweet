@@ -9,10 +9,6 @@ const { checkOwner } = require("../middlewares/checkMiddleware");
 router
   .route("/category")
   .get(authMiddlewers.protect, productController.getAllProductCategory);
-// router
-// .route("/category/:category")
-// .delete(productController.deleteCategory)
-// .put(productController.updateCategory);
 router
   .route("/")
   .get(
@@ -24,6 +20,7 @@ router
     authMiddlewers.protect,
     authMiddlewers.restrictTo("mgr"),
     checkOwner(Branch, "manger", "branchId"),
+    dynamicMiddleware.addVarBody("branch", "branchId"),
     productController.createProduct
   );
 router
@@ -33,6 +30,7 @@ router
     authMiddlewers.protect,
     authMiddlewers.restrictTo("mgr"),
     checkOwner(Branch, "manger", "branchId"),
+    dynamicMiddleware.addVarBody("branch", "branchId"),
     productController.updateProduct
   )
   .delete(
@@ -47,6 +45,7 @@ router
     authMiddlewers.protect,
     authMiddlewers.restrictTo("mgr"),
     checkOwner(Branch, "manger", "branchId"),
+    dynamicMiddleware.addVarBody("branch", "branchId"),
     imgproductMiddlewers.uploadProdectPhoto,
     dynamicMiddleware.filteredBody("image"),
     dynamicMiddleware.setPathImginBody("prodects", "image"),

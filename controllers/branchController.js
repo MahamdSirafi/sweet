@@ -15,3 +15,11 @@ exports.getAllbranch = handlerFactory.getAllpop1(
   { path: "manger", select: "name photo" },
   { path: "location", select: "-_id -__v" }
 );
+exports.statisticsWithLinkUser = handlerFactory.statisticsWithLink(
+  Order,
+  "total",
+  "branches",
+  "branch",
+  "branch.name",
+  "branch.phone"
+);
