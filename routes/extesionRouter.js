@@ -25,25 +25,29 @@ router
     authMiddlewers.protect,
     authMiddlewers.restrictTo("user"),
     dynamicMiddleware.addVarBody("order", "orderId"),
+    extesionController.chekExtesion,
     extesionController.createextesion
   );
 router
   .route("/:id")
   .get(authMiddlewers.protect, extesionController.getextesion)
   .patch(
-    authMiddlewers.restrictTo("user"),
     authMiddlewers.protect,
+    extesionController.chekExtesion,
+    authMiddlewers.restrictTo("user"),
     extesionController.updateextesion
   )
   .delete(
-    authMiddlewers.restrictTo("user"),
     authMiddlewers.protect,
+    extesionController.chekExtesion,
+    authMiddlewers.restrictTo("user"),
     extesionController.deleteextesion
   );
 router
   .route("/:id/uplode")
   .patch(
     authMiddlewers.protect,
+    extesionController.chekExtesion,
     authMiddlewers.restrictTo("user"),
     imgExtentionMiddlewers.uploadUserPhoto,
     dynamicMiddleware.filteredBody("photo"),
