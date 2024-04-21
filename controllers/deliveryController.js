@@ -8,13 +8,13 @@ exports.getAllDelivery = factory.getAll(Delivery);
 exports.getDelivery = factory.getOne(Delivery);
 exports.updateDelivery = factory.updateOne(Delivery);
 exports.deleteDelivery = factory.deleteOne(Delivery);
-console.log("siba");
 exports.createDelivery = catchAsync(async (req, res, next) => {
   const doc = await Delivery.create({
     name: req.body.name,
     branch: req.body.branch,
     phone: req.body.phone,
   });
+  // fghjk
   const newuser = await User.create({
     _id: doc._id,
     name: req.body.name,
