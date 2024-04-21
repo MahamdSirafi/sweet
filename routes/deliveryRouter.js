@@ -38,22 +38,35 @@ router
     dynamicMiddleware.setIdWhatIsMainInBody(Branch, "manger", "branch"),
     deliveryController.createDelivery
   );
-
+  router.route("/:id/mybranch")
+  .patch(
+    authMiddlewers.protect,
+    authMiddlewers.restrictTo("mgr"),
+    dynamicMiddleware.setIdWhatIsMainInBody(Branch, "manger", "branch"),
+    deliveryController.updateDelivery
+  );
+  router.route("/:id/mybranch")
+  .delete(
+    authMiddlewers.protect,
+    authMiddlewers.restrictTo("mgr"),
+    dynamicMiddleware.setIdWhatIsMainInBody(Branch, "manger", "branch"),
+    deliveryController.deleteDelivery
+  );
 router
   .route("/:id")
   .get(
     authMiddlewers.protect,
-    authMiddlewers.restrictTo("mgr", "admin"),
+    authMiddlewers.restrictTo( "admin"),
     deliveryController.getDelivery
   )
   .patch(
     authMiddlewers.protect,
-    authMiddlewers.restrictTo("mgr", "admin"),
+    authMiddlewers.restrictTo( "admin"),
     deliveryController.updateDelivery
   )
   .delete(
     authMiddlewers.protect,
-    authMiddlewers.restrictTo("mgr", "admin"),
+    authMiddlewers.restrictTo( "admin"),
     deliveryController.deleteDelivery
   );
 module.exports = router;
