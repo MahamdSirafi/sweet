@@ -1,4 +1,6 @@
 const extesionController = require("../controllers/extesionController");
+const { checkOwner } = require("../middlewares/checkMiddleware");
+const Order = require("../models/orderModel");
 const authMiddlewers = require("../middlewares/authMiddlewers");
 const imgExtentionMiddlewers = require("../middlewares/imgExtentionMiddlewers");
 const dynamicMiddleware = require("../middlewares/dynamicMiddleware");
@@ -9,6 +11,7 @@ router
   .post(
     authMiddlewers.protect,
     authMiddlewers.restrictTo("user"),
+    checkOwner(Order, "user", "orderId"),
     dynamicMiddleware.addVarBody("order", "orderId"),
     imgExtentionMiddlewers.uploadUserPhoto,
     dynamicMiddleware.setPathImginBody("extensions", "photo"),
@@ -23,6 +26,7 @@ router
   )
   .post(
     authMiddlewers.protect,
+    checkOwner(Order, "user", "orderId"),
     authMiddlewers.restrictTo("user"),
     dynamicMiddleware.addVarBody("order", "orderId"),
     extesionController.chekExtesion,
@@ -34,12 +38,14 @@ router
   .patch(
     authMiddlewers.protect,
     extesionController.chekExtesion,
+    checkOwner(Order, "user", "orderId"),
     authMiddlewers.restrictTo("user"),
     extesionController.updateextesion
   )
   .delete(
     authMiddlewers.protect,
     extesionController.chekExtesion,
+    checkOwner(Order, "user", "orderId"),
     authMiddlewers.restrictTo("user"),
     extesionController.deleteextesion
   );
@@ -49,6 +55,7 @@ router
     authMiddlewers.protect,
     extesionController.chekExtesion,
     authMiddlewers.restrictTo("user"),
+    checkOwner(Order, "user", "orderId"),
     imgExtentionMiddlewers.uploadUserPhoto,
     dynamicMiddleware.filteredBody("photo"),
     dynamicMiddleware.setPathImginBody("extensions", "photo"),
