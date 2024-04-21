@@ -8,7 +8,6 @@ exports.getAllDelivery = factory.getAll(Delivery);
 exports.getDelivery = factory.getOne(Delivery);
 exports.updateDelivery = factory.updateOne(Delivery);
 exports.deleteDelivery = factory.deleteOne(Delivery);
-console.log("sssss");
 exports.createDelivery = catchAsync(async (req, res, next) => {
   const doc = await Delivery.create({
     name: req.body.name,
