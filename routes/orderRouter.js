@@ -70,7 +70,7 @@ router
   .route("/:id/paid") //من اجل تاكيد توصيل الطلب وستلام المبلغ من المستخدم في حال التوصيل
   .patch(
     authMiddlewers.restrictTo("delivery"),
-    checkOwner(Order, "delivery"),
+    checkOwner(Order, "delivery", "id"),
     dynamicMiddleware.addVarBody("paid", "true"),
     dynamicMiddleware.addVarBody("status", "مكتمل"),
     orderController.updateOrder
@@ -79,7 +79,7 @@ router
   .route("/:id/done") //من اجل تاكيد توصيل الطلب وستلام المبلغ من المستخدم في حال التوصيل
   .patch(
     authMiddlewers.restrictTo("delivery"),
-    checkOwner(Order, "delivery"),
+    checkOwner(Order, "delivery", "id"),
     dynamicMiddleware.addVarBody("status", "مكتمل"),
     orderController.updateOrder
   );
