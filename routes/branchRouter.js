@@ -9,6 +9,12 @@ const imgbranchsMiddlewar = require("../middlewares/imgbranchsMiddlewar");
 const express = require("express");
 const router = express.Router();
 router
+  .route("/agguser/:year/:month") //جلب احصائات متعلقة بمستخدم مثل اجمالي  عدد الطلبات وكلفتها خلال شهر او عام
+  .get(
+    authMiddlewers.restrictTo("admin"),
+branchController.statisticsWithLinkBranch
+  );
+router
   .route("/mybranch")
   .get(
     authMiddlewers.protect,
