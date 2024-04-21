@@ -14,6 +14,7 @@ exports.createDelivery = catchAsync(async (req, res, next) => {
     branch: req.body.branch,
     phone: req.body.phone,
   });
+  // fghjk
   const newuser = await User.create({
     _id: doc._id,
     name: req.body.name,
